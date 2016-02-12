@@ -1,4 +1,4 @@
-package test;
+package sorter;
 
 public abstract class Sorter {
 	boolean ascending = true;

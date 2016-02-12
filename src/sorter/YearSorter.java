@@ -1,7 +1,9 @@
-package test;
+package sorter;
 
 import java.io.File;
 import java.util.Comparator;
+
+import test.ID3Tag;
 
 public class YearSorter extends Sorter implements Comparator<File> {
 
