@@ -1,34 +1,71 @@
 package test;
 
+import java.io.File;
+import java.io.RandomAccessFile;
+
 public class MP3
 {
-	String filename;
-	String title;
-	String artist;
-	String album;
-	int year;
-	String comment;
-	byte genre;
-	byte track;
-	long size;
-	String relpath;
-	String abspath;
+	private String title;
+	private String artist;
+	private String album;
+	private String comment;
+	private int year;
+	private byte genre;
+	private long size;
+	private byte track;
+	private String filename;
+	private String abspath;
+	private byte[] arrayOfID3;
+	private String tail;
 
-	public MP3(String filename, String title, String artist, String album, int year, String comment, byte genre,
-			byte track, long size, String relpath, String abspath)
+	public MP3(File file)
 	{
-		super();
-		this.filename = filename;
-		this.title = title;
-		this.artist = artist;
-		this.album = album;
-		this.year = year;
-		this.comment = comment;
-		this.genre = genre;
-		this.track = track;
-		this.size = size;
-		this.relpath = relpath;
-		this.abspath = abspath;
+		this.abspath = file.getAbsolutePath();
+		this.filename = file.getName();
+		convertTailtoString(fileTail(file));
+		setOriginalTitle(tail);
+	}
+
+	private void convertTailtoString(byte[] bajttomb)
+	{
+		String decoded = new String(bajttomb);
+		this.tail = decoded;
+	}
+
+	private void setOriginalTitle(String tail)
+	{
+		String result = "";
+		for (int i = 3; i < 32; i++)
+		{
+			result += tail.charAt(i);
+		}
+		this.title = result;
+	}
+
+	public String getTail()
+	{
+		return tail;
+	}
+
+	public String getTitle()
+	{
+		return title;
+	}
+
+	public String getArrayOfID3()
+	{
+		String result = "";
+		for (byte b : arrayOfID3)
+		{
+			result += b + " ";
+
+		}
+		return result;
+	}
+
+	public void setBajttomb(byte[] bajttomb)
+	{
+		this.arrayOfID3 = bajttomb;
 	}
 
 	public String getFilename()
@@ -41,96 +78,6 @@ public class MP3
 		this.filename = filename;
 	}
 
-	public String getTitle()
-	{
-		return title;
-	}
-
-	public void setTitle(String title)
-	{
-		this.title = title;
-	}
-
-	public String getArtist()
-	{
-		return artist;
-	}
-
-	public void setArtist(String artist)
-	{
-		this.artist = artist;
-	}
-
-	public String getAlbum()
-	{
-		return album;
-	}
-
-	public void setAlbum(String album)
-	{
-		this.album = album;
-	}
-
-	public int getYear()
-	{
-		return year;
-	}
-
-	public void setYear(int year)
-	{
-		this.year = year;
-	}
-
-	public String getComment()
-	{
-		return comment;
-	}
-
-	public void setComment(String comment)
-	{
-		this.comment = comment;
-	}
-
-	public byte getGenre()
-	{
-		return genre;
-	}
-
-	public void setGenre(byte genre)
-	{
-		this.genre = genre;
-	}
-
-	public byte getTrack()
-	{
-		return track;
-	}
-
-	public void setTrack(byte track)
-	{
-		this.track = track;
-	}
-
-	public long getSize()
-	{
-		return size;
-	}
-
-	public void setSize(long size)
-	{
-		this.size = size;
-	}
-
-	public String getRelpath()
-	{
-		return relpath;
-	}
-
-	public void setRelpath(String relpath)
-	{
-		this.relpath = relpath;
-	}
-
 	public String getAbspath()
 	{
 		return abspath;
@@ -141,4 +88,28 @@ public class MP3
 		this.abspath = abspath;
 	}
 
+	private byte[] fileTail(File file)
+	{
+		try
+		{
+			RandomAccessFile handler = new RandomAccessFile(file, "r");
+			long fileLength = file.length() - 1;
+			byte[] buffer = new byte[128];
+
+			for (int i = 0; i < buffer.length; i++)
+			{
+				handler.seek(fileLength - 127 + i);
+				buffer[i] = handler.readByte();
+			}
+			handler.close();
+			return buffer;
+		}
+
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
+	}
 }
