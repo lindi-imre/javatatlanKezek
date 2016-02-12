@@ -3,7 +3,7 @@ package sorter;
 import java.io.File;
 import java.util.Comparator;
 
-import test.ID3Tag;
+import id3tag.ID3Tag;
 
 public class AlbumSorter extends Sorter implements Comparator<File> {
 
