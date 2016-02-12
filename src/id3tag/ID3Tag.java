@@ -11,7 +11,7 @@ public class ID3Tag {
 	private String album;
 	private int year;
 	private String comment;
-	private int genre;
+	private String genre;
 
 	private ID3Tag() {
 	}
@@ -26,18 +26,18 @@ public class ID3Tag {
 
 	public static ID3Tag parse(File file) {
 		byte[] last128 = tail(file);
-		byte[] baTitle = readXBytes(last128, 3, 32);
+		byte[] baTitle = readXBytes(last128, 3, 33);
 		String title = new String(baTitle).trim();
-		byte[] baArtist = readXBytes(last128, 33, 62);
+		byte[] baArtist = readXBytes(last128, 33, 63);
 		String artist = new String(baArtist).trim();
-		byte[] baAlbum = readXBytes(last128, 63, 92);
+		byte[] baAlbum = readXBytes(last128, 63, 93);
 		String album = new String(baAlbum).trim();
-		byte[] baYear = readXBytes(last128, 93, 96);
+		byte[] baYear = readXBytes(last128, 93, 97);
 		int year = Integer.parseInt(new String(baYear).trim());
-		byte[] baComment = readXBytes(last128, 97, 126);
+		byte[] baComment = readXBytes(last128, 97, 125);
 		String comment = new String(baComment).trim();
 		byte[] baGenre = readXBytes(last128, 127, 128);
-		int genre = Integer.parseInt(new String(baGenre).trim());
+		String genre = new String(baGenre).trim();
 		ID3Tag tag = new ID3Tag();
 		tag.setTitle(title);
 		tag.setArtist(artist);
@@ -106,11 +106,11 @@ public class ID3Tag {
 		this.comment = comment;
 	}
 
-	public int getGenre() {
+	public String getGenre() {
 		return genre;
 	}
 
-	public void setGenre(int genre) {
+	public void setGenre(String genre) {
 		this.genre = genre;
 	}
 
@@ -130,28 +130,15 @@ public class ID3Tag {
 
 	@Override
 	public String toString() {
-		return "Artist: " + (artist == null ? "NULL" : artist).trim() + "\tAlbum: " + album + "\tTitle: "
-				+ title.trim();
+		return "Artist: " + (artist == null ? "NULL" : artist).trim() + "\nAlbum: " + album + "\nTitle: " + title.trim()
+				+ "\nYear: " + year + "\nComment: " + comment + "\nGenre: " + genre;
 	}
 
 	public static void main(String[] args) {
-		ID3Tag tag1 = ID3Tag.parse(
-				new File("d:" + File.separator + "mp3" + File.separator + "01-electric_universe_-_quasar-psycz.mp3"));
-		ID3Tag tag2 = ID3Tag.parse(
-				new File("d:" + File.separator + "mp3" + File.separator + "01-electric_universe_-_quasar-psycz.mp3"));
-		ID3Tag tag3 = ID3Tag.parse(
-				new File("d:" + File.separator + "mp3" + File.separator + "01-electric_universe_-_quasar-psycz.mp3"));
-		ID3Tag tag4 = ID3Tag.parse(
-				new File("d:" + File.separator + "mp3" + File.separator + "01-electric_universe_-_quasar-psycz.mp3"));
-		ID3Tag tag5 = ID3Tag.parse(
-				new File("d:" + File.separator + "mp3" + File.separator + "01-electric_universe_-_quasar-psycz.mp3"));
+		ID3Tag tag1 = ID3Tag.parse(new File("C:" + File.separator + "Users" + File.separator + "Vitya" + File.separator
+				+ "Downloads" + File.separator + "mp3" + File.separator + "01-electric_universe_-_quasar-psycz.mp3"));
 		List<ID3Tag> tags = new ArrayList<ID3Tag>();
 		tags.add(tag1);
-		tags.add(tag2);
-		tags.add(tag3);
-		tags.add(tag4);
-		tags.add(tag5);
-		int i = tags.indexOf(tag4);
-		System.out.println(i);
+		System.out.println(tags);
 	}
 }
