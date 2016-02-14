@@ -135,8 +135,8 @@ public class ID3Tag {
 	}
 
 	public static void main(String[] args) {
-		ID3Tag tag1 = ID3Tag.parse(new File("C:" + File.separator + "Users" + File.separator + "Vitya" + File.separator
-				+ "Downloads" + File.separator + "mp3" + File.separator + "01-electric_universe_-_quasar-psycz.mp3"));
+		ID3Tag tag1 = ID3Tag.parse(new File("C:" + File.separator + "Users" + File.separator + "Imre" + File.separator
+				+ "Downloads" + File.separator + "mp3" + File.separator + "alienjesus.mp3"));
 		List<ID3Tag> tags = new ArrayList<ID3Tag>();
 		tags.add(tag1);
 		System.out.println(tags);

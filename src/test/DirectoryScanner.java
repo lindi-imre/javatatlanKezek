@@ -5,6 +5,9 @@ import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 
+import sorter.Sorter;
+import sorter.YearSorter;
+
 public class DirectoryScanner {
 	List<File> fileList;
 	String path;
@@ -59,8 +62,11 @@ public class DirectoryScanner {
 	}
 
 	public static void main(String[] args) {
-		DirectoryScanner files = new DirectoryScanner("D:\\it", "mp3", true);
+		DirectoryScanner files = new DirectoryScanner("D:\\it", "mp3", false);
 		List<File> temp = files.getFileList();
+		Sorter s = new YearSorter();
+		s.setAscending(false);
+		temp.sort(s);
 		for (File file : temp) {
 			System.out.println(file);
 		}

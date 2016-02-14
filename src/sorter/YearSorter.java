@@ -1,11 +1,10 @@
 package sorter;
 
 import java.io.File;
-import java.util.Comparator;
 
 import id3tag.ID3Tag;
 
-public class YearSorter extends Sorter implements Comparator<File> {
+public class YearSorter extends Sorter {
 
 	@Override
 	public int compare(File file1, File file2) {
