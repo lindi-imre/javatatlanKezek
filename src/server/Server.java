@@ -3,10 +3,7 @@ package server;
 import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-<<<<<<< HEAD
-=======
 import java.io.ObjectOutputStream;
->>>>>>> origin/master
 //File Name GreetingServer.java
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -25,11 +22,7 @@ public class Server
 	}
 
 	@SuppressWarnings("unchecked")
-<<<<<<< HEAD
-	public void run() throws ClassNotFoundException
-=======
 	public void run() throws Exception
->>>>>>> origin/master
 	{
 		while (true)
 
@@ -43,7 +36,6 @@ public class Server
 				// When client connected print this text
 				System.out.println("Client connected to " + server.getRemoteSocketAddress());
 
-<<<<<<< HEAD
 				ObjectInputStream streamFromServer = new ObjectInputStream(server.getInputStream());
 				HashMap<File, byte[]> testMap = new HashMap<>();
 				testMap = (HashMap<File, byte[]>) streamFromServer.readObject();
@@ -54,7 +46,6 @@ public class Server
 					System.out.println(key + " " + value);
 				}
 				streamFromServer.close();
-=======
 				// Getting object from client
 				ObjectInputStream streamFromClient = new ObjectInputStream(server.getInputStream());
 				ObjectOutputStream steamToClient = new ObjectOutputStream(server.getOutputStream());
@@ -69,7 +60,6 @@ public class Server
 
 					System.out.println(entry.toString());
 				}
->>>>>>> origin/master
 
 				server.close();
 
