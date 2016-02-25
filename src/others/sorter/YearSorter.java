@@ -1,8 +1,8 @@
-package sorter;
+package others.sorter;
 
 import java.io.File;
 
-import id3tag.ID3Tag;
+import others.id3tag.ID3Tag;
 
 public class YearSorter extends Sorter {
 

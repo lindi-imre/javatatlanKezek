@@ -8,11 +8,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-public class ServerTestTwo
+public class Server
 {
 	private ServerSocket serverSocket;
 
-	public ServerTestTwo(int port) throws IOException
+	public Server(int port) throws IOException
 	{
 		serverSocket = new ServerSocket(port);
 		// serverSocket.setSoTimeout(90000); for timeout remove comment
@@ -60,7 +60,7 @@ public class ServerTestTwo
 			System.out.println("start server");
 
 			// Create server and run
-			ServerTestTwo test = new ServerTestTwo(port);
+			Server test = new Server(port);
 			test.run();
 			// Thread t = new ServerTestTwo(port);
 			// t.start();

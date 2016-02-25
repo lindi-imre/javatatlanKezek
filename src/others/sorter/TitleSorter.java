@@ -1,9 +1,9 @@
-package sorter;
+package others.sorter;
 
 import java.io.File;
 import java.util.Comparator;
 
-import id3tag.ID3Tag;
+import others.id3tag.ID3Tag;
 
 public class TitleSorter extends Sorter implements Comparator<File> {
 

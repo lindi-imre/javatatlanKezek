@@ -1,4 +1,4 @@
-package id3tag;
+package others.id3tag;
 
 import java.io.File;
 

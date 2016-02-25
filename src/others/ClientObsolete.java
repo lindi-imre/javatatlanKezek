@@ -1,4 +1,4 @@
-package client;
+package others;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
-public class ClientTest
+public class ClientObsolete
 {
 	public static void main(String[] args)
 	{

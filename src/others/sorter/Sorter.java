@@ -1,4 +1,4 @@
-package sorter;
+package others.sorter;
 
 import java.io.File;
 import java.util.Comparator;

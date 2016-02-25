@@ -7,11 +7,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-public class ServerTest extends Thread
+public class ServerThread extends Thread
 {
 	private ServerSocket serverSocket;
 
-	public ServerTest(int port) throws IOException
+	public ServerThread(int port) throws IOException
 	{
 		serverSocket = new ServerSocket(port);
 		serverSocket.setSoTimeout(90000);
@@ -48,7 +48,7 @@ public class ServerTest extends Thread
 		int port = 6666;
 		try
 		{
-			Thread t = new ServerTest(port);
+			Thread t = new ServerThread(port);
 			t.start();
 		} catch (IOException e)
 		{

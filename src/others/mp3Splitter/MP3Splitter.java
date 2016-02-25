@@ -1,4 +1,4 @@
-package mp3Splitter;
+package others.mp3Splitter;
 
 import java.io.File;
 import java.io.FileInputStream;

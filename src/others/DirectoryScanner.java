@@ -1,12 +1,12 @@
-package test;
+package others;
 
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-import sorter.Sorter;
-import sorter.YearSorter;
+import others.sorter.Sorter;
+import others.sorter.YearSorter;
 
 public class DirectoryScanner {
 	List<File> fileList;
