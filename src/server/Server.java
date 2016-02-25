@@ -1,12 +1,14 @@
 package server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 //File Name GreetingServer.java
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class Server
 {
@@ -18,7 +20,8 @@ public class Server
 		// serverSocket.setSoTimeout(90000); for timeout remove comment
 	}
 
-	public void run()
+	@SuppressWarnings("unchecked")
+	public void run() throws ClassNotFoundException
 	{
 		while (true)
 		{
@@ -31,13 +34,17 @@ public class Server
 				// When client connected print this text
 				System.out.println("Client connected to " + server.getRemoteSocketAddress());
 
-				// Get stream from client and print out
-				DataInputStream in = new DataInputStream(server.getInputStream());
-				System.out.println(in.readUTF());
+				ObjectInputStream streamFromServer = new ObjectInputStream(server.getInputStream());
+				HashMap<File, byte[]> testMap = new HashMap<>();
+				testMap = (HashMap<File, byte[]>) streamFromServer.readObject();
+				for (Entry<File, byte[]> entry : testMap.entrySet())
+				{
+					File key = entry.getKey();
+					byte[] value = entry.getValue();
+					System.out.println(key + " " + value);
+				}
+				streamFromServer.close();
 
-				// Send data to client and close the server
-				DataOutputStream out = new DataOutputStream(server.getOutputStream());
-				out.writeUTF("Thank you for connecting to " + server.getLocalSocketAddress() + "\nGoodbye!");
 				server.close();
 
 			} catch (SocketTimeoutException s)
